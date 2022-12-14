@@ -1,0 +1,166 @@
+.top_nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+  padding: 0 20px;
+  background: rgb(0, 0, 0);
+  box-shadow: 1px 3px 5px 0px #0000007d;
+  -webkit-box-shadow: 1px 3px 3px 0px rgb(0 0 0 / 28%);;
+  -moz-box-shadow: 1px 3px 5px 0px rgba(0, 0, 0, 0.513);
+  border-bottom: 1px solid #009b86;
+
+}
+
+.logo img {
+  width: 200px;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+}
+
+.user p {
+  padding: 5px 14px;
+  background: rgb(17, 17, 17);
+  border-radius: 5px;
+  color: white;
+  border: 0.3px solid #181818;
+}
+
+.user_img {
+  overflow: hidden;
+  width: 50px;
+}
+
+.user_img img {
+  width: 100%;
+}
+
+.side_nav {
+  position: fixed;
+  top: 100px;
+  background: #00272e;
+  width: 215px;
+  height: 100vh;
+  padding: 5px;
+  border-right: 1px solid #000000;
+  box-shadow: 3px 0 5px 0px #00000066;
+
+}
+.side_nav li {
+  border-bottom: 1px solid rgb(8, 65, 100);
+}
+
+.side_nav a {
+  padding: 5px;
+  margin: 19px 8px;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.side_nav p {
+    padding-left: 10px;
+}
+
+.side_nav a:hover {
+  background: #00323b;
+}
+
+.side_nav li,
+.side_nav a {
+  text-decoration: none;
+  list-style: none;
+  color: rgb(189, 189, 189);
+  display: flex;
+  align-items: center;
+}
+
+.menu_btn svg {
+  color: white;
+  cursor: pointer;
+}
+
+.left_menu {
+  display: flex;
+  align-items: center;
+}
+
+
+@media screen and (min-width:600px)  {
+  .menu_btn, .bar {
+    display: none;
+  }
+}
+
+@media screen and (max-width:600px) {
+  .side_nav {
+    display: none;
+  }
+
+  .logo img {
+    width: 200px;
+  }
+}
+
+@media screen and (max-width:425px) {
+
+  .logo img {
+    width: 150px;
+  }
+
+  .user p {
+    display: none;
+  }
+
+  .top_nav {
+    height: 80px;
+    padding: 0 10px;
+  }
+}
+
+
+.bar {
+  position: absolute;
+  background: #00272e;
+  width: 80%;
+  height: 80vh;
+  top: 50px;
+  left: 30px;
+  padding: 10px;
+}
+
+.bar a svg {
+  color: #00a37bd7;
+}
+
+.container_btn {
+  color: white;
+  cursor: pointer;
+}
+
+.bar a {
+  text-decoration: none;
+  display: flex;
+  color: rgb(179, 179, 179);
+  margin: 20px 10px ;
+  border-radius: 4px;
+  transition: .2s ease-in-out;
+
+}
+.bar p {
+  margin-left: 10px;
+}
+
+.bar li {
+  list-style: none;
+}
+
+.bar a:hover {
+  background: #001517;
+  padding: 5px;
+}

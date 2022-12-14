@@ -1,0 +1,83 @@
+.form_container {
+    position: fixed;
+    background: #00000075;
+    display: flex;
+    margin-top: -65px;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    height: 100vh;
+}
+
+.form_container button {
+    /* position: fixed; */
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.form_container button svg {
+    color: rgb(0, 0, 0);
+}
+
+.form_box {
+    background: #ffffff;
+    padding: 10px;
+    display: grid;
+    margin: 5%;
+    border-radius: 10px;
+    width: 100%;
+    overflow-x: scroll;
+    -webkit-box-shadow: 1px 1px 3px 3px rgba(0,0,0,0.17);
+    -moz-box-shadow: 1px 1px 3px 3px rgba(0,0,0,0.17);
+    box-shadow: 1px 1px 3px 3px rgba(0,0,0,0.17);
+}
+
+.form_box h3 {
+    color: rgb(0, 0, 0);
+}
+
+.form_box li {
+    display: grid;
+    align-items: center;
+    color: rgb(0, 0, 0);
+    padding: 10px 15px;
+}
+
+.form_box input[type=text], .form_box select {
+    background: #fcfcfc;
+    padding: 3px 10px;
+    border-radius: 5px;
+    margin: 3px 0;
+    border: 0.5px solid #8b8b8b;
+}
+
+.form_box input[type=text]:hover, .form_box select:hover {
+    background: #f4f4f4;
+}
+
+.updateform_container {
+    margin-top: 80px;
+    margin-left: 220px;
+}
+
+.updateform_box {
+    display: grid;
+    background: #ffffff;
+    padding: 10px;
+    margin: 10px;
+    -webkit-box-shadow: 1px 1px 3px 3px rgba(0,0,0,0.17);
+    -moz-box-shadow: 1px 1px 3px 3px rgba(0,0,0,0.17);
+    box-shadow: 1px 1px 3px 3px rgba(0,0,0,0.17);
+}
+
+.updateform_box li {
+    display: grid;
+    align-items: center;
+    color: rgb(0, 0, 0);
+    padding: 10px 15px;
+}
+
+.cancel_btn {
+    cursor: pointer;
+}
