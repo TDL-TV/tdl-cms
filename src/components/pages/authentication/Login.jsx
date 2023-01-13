@@ -11,16 +11,19 @@ const Login = () => {
   useEffect(() => {
     if (loading) return;
 
-    if (user) navigate("/dashboard");
+    if (user) navigate("/dashboard/news and events");
   }, [user, loading]);
 
   return (
     <div className="login__container">
-      <button className="login__btn login__google" onClick={signInWithGoogle}>
-        Login with Google
-      </button>
-      <div>
-        Dont have an a count? <Link to="/register">Register</Link>
+      <h1>Welcome to TDL TV Content Management Site</h1>
+      <div className="logindiv">
+        <button onClick={signInWithGoogle}>
+          Login with Google
+        </button>
+        <div>
+          Dont have an a count? <Link to="/register">Register</Link>
+        </div>
       </div>
     </div>
   );

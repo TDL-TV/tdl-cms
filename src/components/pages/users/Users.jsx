@@ -14,10 +14,17 @@ import {
 } from "firebase/firestore";
 import { db } from "../../firebase/FirebaseConfig";
 import { useState, useEffect, useRef } from "react";
-import { FaPen, FaPlus, FaTrash } from "react-icons/fa";
+import { FaPlus, FaTrash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import parse from "html-react-parser";
+import { useLoadingContext } from "react-router-loading";
+import JoditEditor from "jodit-react";
 
 const Users = () => {
+  const editor = useRef(null);
+
+  const loadingContext = useLoadingContext();
+
   const navigate = useNavigate();
   let { userName } = useParams();
 
@@ -38,13 +45,13 @@ const Users = () => {
 
   const updateUserBio = async (id) => {
     const updatedUserName = usernameInputRef.current.value;
-    const updatedUserDescription = descriptionInputRef.current.value;
+    // const updatedUserDescription = descriptionInputRef.current.value;
 
     const postDoc = doc(db, "users", id);
 
     const newUserBio = {
       username: updatedUserName,
-      description: updatedUserDescription,
+      description: addDescription,
     };
 
     await updateDoc(postDoc, newUserBio);
@@ -71,6 +78,8 @@ const Users = () => {
   };
 
   useEffect(() => {
+    loadingContext.start();
+
     const getPosts = async () => {
       const postData = await getDocs(postCollectionRef);
       setPosts(postData.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
@@ -79,10 +88,12 @@ const Users = () => {
     const getUsers = async () => {
       const userData = await getDocs(usersCollectionRef);
       setUsers(userData.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+
+      loadingContext.done();
     };
 
-    getUsers();
     getPosts();
+    getUsers();
   }, []);
 
   return (
@@ -99,16 +110,23 @@ const Users = () => {
               </button>
               <input
                 type="text"
+                placeholder="Name...."
                 onChange={(event) => {
                   setAddUser(event.target.value);
                 }}
               />
               <div>
-                <textarea
+                {/* <textarea
                   onChange={(event) => {
                     setAddDescription(event.target.value);
                   }}
-                ></textarea>
+                ></textarea> */}
+                Description:
+                <JoditEditor
+                  ref={editor}
+                  // value={addDescription}
+                  onChange={(newContent) => setAddDescription(newContent)}
+                />
               </div>
             </>
           ) : (
@@ -128,17 +146,28 @@ const Users = () => {
             {users.map((username) => {
               return (
                 <>
-                  <li>
-                    <Link to={"/user/" + username.username}>
-                      {username.username}
-                    </Link>
-                  </li>
-                  <div
-                    onClick={() => {
-                      deleteUser(username.id);
-                    }}
-                  >
-                    <FaTrash />
+                  <div className="usercategory">
+                    <li>
+                      <Link to={"/user/" + username.username}>
+                        {username.username}
+                      </Link>
+                    </li>
+                    <div
+                      onClick={() => {
+                        if (
+                          window.confirm(
+                            `${
+                              "Are you sure you want to delete" +
+                              username.username
+                            }`
+                          )
+                        ) {
+                          deleteUser(username.id);
+                        }
+                      }}
+                    >
+                      <FaTrash />
+                    </div>
                   </div>
                 </>
               );
@@ -157,11 +186,6 @@ const Users = () => {
                       <fieldset>
                         <legend>Update User Information</legend>
                         <label htmlFor="username"></label>
-
-                        <div className="current_username">
-                          <h4>Current Username:</h4>
-                          <p>{user.username}</p>
-                        </div>
                         <hr />
 
                         <div className="username_textarea">
@@ -169,24 +193,23 @@ const Users = () => {
                           <textarea
                             type="text"
                             id="username"
-                            name={user.username}
+                            // name={user.username}
                             ref={usernameInputRef}
-                          ></textarea>
+                          >
+                            {user.username}
+                          </textarea>
                         </div>
                         <hr />
 
-                        <div className="current_description">
-                          <h4>Current Description:</h4>
-                          <p>{user.description}</p>
-                        </div>
-
                         <div className="description_textarea">
                           <h4>New Description:</h4>
-                          <textarea
-                            type="text"
-                            id="description"
-                            ref={descriptionInputRef}
-                          ></textarea>
+                          <JoditEditor
+                            ref={editor}
+                            value={user.description}
+                            onChange={(newContent) =>
+                              setAddDescription(newContent)
+                            }
+                          />
                         </div>
                         <button
                           onClick={() => {
@@ -219,8 +242,8 @@ const Users = () => {
                       <li>
                         <p> Type: </p> {data.type}
                       </li>
-                      <li>
-                        <p> Description: </p> {data.description}
+                      <li className="userdata_description">
+                        <p> Description: </p> {parse(data.description)}
                       </li>
                     </div>
                   </>

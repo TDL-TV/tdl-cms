@@ -1,83 +1,130 @@
 .form_container {
-    position: fixed;
-    background: #00000075;
-    display: flex;
-    margin-top: -65px;
-    width: 100%;
-    left: 0;
-    bottom: 0;
-    height: 100vh;
+  position: fixed;
+  background: #00000075;
+  display: flex;
+  margin-top: -65px;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  height: 100vh;
+  z-index: 1;
 }
 
 .form_container button {
-    /* position: fixed; */
-    background: none;
-    border: none;
-    cursor: pointer;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
 .form_container button svg {
-    color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
 }
 
 .form_box {
-    background: #ffffff;
-    padding: 10px;
-    display: grid;
-    margin: 5%;
-    border-radius: 10px;
-    width: 100%;
-    overflow-x: scroll;
-    -webkit-box-shadow: 1px 1px 3px 3px rgba(0,0,0,0.17);
-    -moz-box-shadow: 1px 1px 3px 3px rgba(0,0,0,0.17);
-    box-shadow: 1px 1px 3px 3px rgba(0,0,0,0.17);
+  background: #ffffff;
+  padding: 10px;
+  display: grid;
+  margin: 120px 5% 15px;
+  border-radius: 10px;
+  width: 100%;
+  overflow-x: scroll;
+  -webkit-box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.17);
+  -moz-box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.17);
+  box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.17);
 }
 
 .form_box h3 {
-    color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
 }
 
 .form_box li {
-    display: grid;
-    align-items: center;
-    color: rgb(0, 0, 0);
-    padding: 10px 15px;
+  display: grid;
+  align-items: center;
+  color: rgb(0, 0, 0);
+  padding: 10px 15px;
+}
+.form_box li p,
+.form_box .jodit-react-container li {
+  background: unset;
+  padding: unset;
+  margin: unset;
 }
 
-.form_box input[type=text], .form_box select {
-    background: #fcfcfc;
-    padding: 3px 10px;
-    border-radius: 5px;
-    margin: 3px 0;
-    border: 0.5px solid #8b8b8b;
+.form_box li p:hover {
+  background: unset;
+  color: unset;
 }
 
-.form_box input[type=text]:hover, .form_box select:hover {
-    background: #f4f4f4;
+.form_box input[type="text"],
+.form_box select {
+  background: #fcfcfc;
+  padding: 3px 10px;
+  border-radius: 5px;
+  margin: 3px 0;
+  cursor: pointer;
+  border: 0.5px solid #8b8b8b;
+}
+
+.form_box input[type="text"]:hover,
+.form_box select:hover {
+  background: #f4f4f4;
 }
 
 .updateform_container {
-    margin-top: 80px;
-    margin-left: 220px;
+  margin-top: 120px;
+  margin-left: 220px;
 }
 
 .updateform_box {
-    display: grid;
-    background: #ffffff;
-    padding: 10px;
-    margin: 10px;
-    -webkit-box-shadow: 1px 1px 3px 3px rgba(0,0,0,0.17);
-    -moz-box-shadow: 1px 1px 3px 3px rgba(0,0,0,0.17);
-    box-shadow: 1px 1px 3px 3px rgba(0,0,0,0.17);
+  display: grid;
+  background: #ffffff;
+  padding: 10px;
+  margin: 10px;
+  -webkit-box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.17);
+  -moz-box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.17);
+  box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.17);
+}
+
+.updateform_box textarea,
+.updateform_box select {
+  border: 0.2px solid grey;
+  border-radius: 5px;
+  padding: 5px;
+  background: #001517da;
+  color: white;
+}
+
+.updateform_container input[type="submit" i],
+.form_container input[type="submit" i] {
+  background: black;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  margin: 0 5%;
+  height: 30px;
+  cursor: pointer;
 }
 
 .updateform_box li {
-    display: grid;
-    align-items: center;
-    color: rgb(0, 0, 0);
-    padding: 10px 15px;
+  display: grid;
+  align-items: center;
+  color: rgb(0, 0, 0);
+  z-index: 1;
+  padding: 10px 15px;
 }
 
 .cancel_btn {
-    cursor: pointer;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+  .updateform_container {
+    margin-left: 0;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .updateform_container {
+    margin-top: 100px;
+  }
 }

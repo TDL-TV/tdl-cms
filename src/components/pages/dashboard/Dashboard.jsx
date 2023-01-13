@@ -1,4 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
+import { useLoadingContext } from "react-router-loading";
 import "../../assets/css/Content.css";
 import { useParams } from "react-router-dom";
 import {
@@ -7,16 +8,20 @@ import {
   deleteDoc,
   doc,
   getDocs,
+  onSnapshot,
   query,
   where,
 } from "firebase/firestore";
-import { auth, db } from "../../firebase/FirebaseConfig";
+import { auth, db, logout } from "../../firebase/FirebaseConfig";
 import { useState, useEffect } from "react";
 import { FaPlus, FaTrash } from "react-icons/fa";
 import { useAuthState } from "react-firebase-hooks/auth";
+import parse from "html-react-parser";
+import ReactGA from "react-ga";
 
 const Dashboard = () => {
   let { categoryName } = useParams();
+  const loadingContext = useLoadingContext();
 
   // Login Details
   const [user, loading, error] = useAuthState(auth);
@@ -64,6 +69,10 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
+    loadingContext.start();
+
+    ReactGA.pageview(window.location.pathname);
+
     if (loading) return;
     if (!user) return navigate("/");
     fetchUserName();
@@ -71,6 +80,7 @@ const Dashboard = () => {
     const getPosts = async () => {
       const postData = await getDocs(postCollectionRef);
       setPosts(postData.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      loadingContext.done();
     };
 
     const getCategories = async () => {
@@ -88,30 +98,33 @@ const Dashboard = () => {
     <div className="content_container">
       <div className="dashboard">
         <div className="content_count">
-          <p> logged in as : {user?.email}</p>
-          <div className="content_type">
-            <Link to="/users">
+          <Link to="/users">
+            <div className="content_type">
               <li>Users</li>
-            </Link>
-          </div>
-          <div className="content_type">
-            <Link to="/photos">
+            </div>
+          </Link>
+          <Link to="/photos">
+            <div className="content_type">
               <li>Photos</li>
-            </Link>
-          </div>
-          <div className="content_type">
-            <Link to="/videos">
+            </div>
+          </Link>
+          <Link to="/videos">
+            <div className="content_type">
               <li>Videos</li>
-            </Link>
-          </div>
-          <div className="content_type">
-            <Link to="/articles and blog">
+            </div>
+          </Link>
+          <Link to="/articles and blog">
+            <div className="content_type">
               <li>Articles and blogs</li>
-            </Link>
-          </div>
+            </div>
+          </Link>
         </div>
 
         <h3>Categories</h3>
+        <p className="account"> logged in as : {user?.email}</p>
+        <div className="user_img">
+          <button onClick={logout}>Logout</button>
+        </div>
 
         <div className="add_category">
           {newCategory ? (
@@ -142,25 +155,30 @@ const Dashboard = () => {
             {categories.map((categories) => {
               return (
                 <>
-                  <li>
-                    <Link to={"/dashboard/" + categories.tag}>
-                      {categories.tag}
-                    </Link>
-                  </li>
-                  <div
-                    onClick={() => {
-                      if (
-                        window.confirm(
-                          `${
-                            "Are you sure you want to delete " + categories.tag
-                          }`
-                        )
-                      ) {
-                        deleteCategory(categories.id);
-                      }
-                    }}
-                  >
-                    <FaTrash />
+                  <div className="usercategory">
+                    <li>
+                      <Link
+                        to={"/dashboard/" + categories.tag.replace(/\s+/g, "-")}
+                      >
+                        {categories.tag}
+                      </Link>
+                    </li>
+                    <div
+                      onClick={() => {
+                        if (
+                          window.confirm(
+                            `${
+                              "Are you sure you want to delete " +
+                              categories.tag
+                            }`
+                          )
+                        ) {
+                          deleteCategory(categories.id);
+                        }
+                      }}
+                    >
+                      <FaTrash />
+                    </div>
                   </div>
                 </>
               );
@@ -168,9 +186,11 @@ const Dashboard = () => {
           </div>
 
           <div className="category_content">
-            <h4>{categoryName}</h4>
+            <h4>{categoryName.replaceAll("-", " ")}</h4>
             {posts
-              .filter((data) => data.category === categoryName)
+              .filter(
+                (data) => data.category === categoryName.replaceAll("-", " ")
+              )
               .map((data) => {
                 return (
                   <>
@@ -184,8 +204,8 @@ const Dashboard = () => {
                       <li>
                         <p> Type: </p> {data.type}
                       </li>
-                      <li>
-                        <p> Description: </p> {data.description}
+                      <li className="data_description">
+                        <p> Description: </p> {parse(data.description)}
                       </li>
                     </div>
                   </>

@@ -53,65 +53,79 @@ const Navbar = () => {
           {sideMenu ? (
             <>
               <div className="menu_container">
-
                 <div className="bar">
-                <div className="container_btn">
-                  <RiCloseCircleLine size={27}  onClick={() => {
-                    setSideMenu(false)
-                  }}/>
-                </div>
+                  <div className="container_btn">
+                    <RiCloseCircleLine
+                      size={27}
+                      onClick={() => {
+                        setSideMenu(false);
+                      }}
+                    />
+                  </div>
                   {/* <div className="side_nav"> */}
-                    <li onClick={() => {
-                      setSideMenu(false)
-                    }}>
-                      <Link to="/dashboard/news and events">
-                        {" "}
-                        <FaHome size={20} /> <p>Dashboard</p>
-                      </Link>
-                    </li>
-                    <li onClick={() => {
-                      setSideMenu(false)
-                    }}>
-                      <Link to={"photo"}>
-                        {" "}
-                        <FaImages size={20} /> <p> Photos</p>
-                      </Link>
-                    </li>
-                    <li onClick={() => {
-                      setSideMenu(false)
-                    }}>
-                      <Link to={"video"}>
-                        {" "}
-                        <FaPlay size={20} /> <p> Videos</p>
-                      </Link>
-                    </li>
-                    <li onClick={() => {
-                      setSideMenu(false)
-                    }}>
+                  <li
+                    onClick={() => {
+                      setSideMenu(false);
+                    }}
+                  >
+                    <Link to="/dashboard/News and Events">
                       {" "}
-                      <Link to={"articles and blog"}>
-                        {" "}
-                        <FaBook size={20} /> <p>Articles and Blog</p>
-                      </Link>
-                    </li>
+                      <FaHome size={20} /> <p>Dashboard</p>
+                    </Link>
+                  </li>
+                  <li
+                    onClick={() => {
+                      setSideMenu(false);
+                    }}
+                  >
+                    <Link to={"photo"}>
+                      {" "}
+                      <FaImages size={20} /> <p> Photos</p>
+                    </Link>
+                  </li>
+                  <li
+                    onClick={() => {
+                      setSideMenu(false);
+                    }}
+                  >
+                    <Link to={"video"}>
+                      {" "}
+                      <FaPlay size={20} /> <p> Videos</p>
+                    </Link>
+                  </li>
+                  <li
+                    onClick={() => {
+                      setSideMenu(false);
+                    }}
+                  >
+                    {" "}
+                    <Link to={"articles and blog"}>
+                      {" "}
+                      <FaBook size={20} /> <p>Articles and Blog</p>
+                    </Link>
+                  </li>
 
-                    <li onClick={() => {
-                      setSideMenu(false)
-                    }}>
-                      <Link to="users/">
-                        <FaUserFriends />
-                        <p> Users</p>
-                      </Link>
-                    </li>
+                  <li
+                    onClick={() => {
+                      setSideMenu(false);
+                    }}
+                  >
+                    <Link to="users/">
+                      <FaUserFriends />
+                      <p> Users</p>
+                    </Link>
+                  </li>
 
-                    <li onClick={() => {
-                      setSideMenu(false)
-                    }}>
-                      <Link to={"/images"}>
-                        <FaPhotoVideo />
-                        <p>Images</p>
-                      </Link>
-                    </li>
+                  <li
+                    onClick={() => {
+                      setSideMenu(false);
+                    }}
+                  >
+                    <Link to={"/images"}>
+                      <FaPhotoVideo />
+                      <p>Images</p>
+                    </Link>
+                  </li>
                   {/* </div> */}
                 </div>
               </div>
@@ -119,30 +133,34 @@ const Navbar = () => {
           ) : (
             <>
               <div className="menu_btn">
-                <RiMenuFill onClick={() => {
-                  setSideMenu(true)
-                }} size={27} />
+                <RiMenuFill
+                  onClick={() => {
+                    setSideMenu(true);
+                  }}
+                  size={27}
+                />
               </div>
             </>
           )}
           <div className="logo">
-            <Link to="/dashboard">
-            <img src={logo} />
+            <Link to="/dashboard/News and Events">
+              <img src={logo} />
             </Link>
           </div>
         </div>
 
         <div className="user">
-          <p>{user?.email}</p>
-          <div className="user_img">
-            <button onClick={logout}>Logout</button>
+       
+          <div className="userimg">
+            <img src={user?.photoURL} alt={user?.displayName} />
+          <p>{user?.displayName}</p>
           </div>
         </div>
       </div>
 
       <div className="side_nav">
         <li>
-          <Link to="/dashboard/news and events">
+          <Link to="/dashboard/News and Events">
             {" "}
             <FaHome size={20} /> <p>Dashboard</p>
           </Link>
@@ -168,7 +186,7 @@ const Navbar = () => {
         </li>
 
         <li>
-          <Link to="users/">
+          <Link to="user/Maxwell Peter">
             <FaUserFriends />
             <p> Users</p>
           </Link>

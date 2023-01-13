@@ -1,6 +1,7 @@
 {
   "name": "react-lap",
   "version": "0.1.0",
+  "homepage": "http://tdl-tv.github.io/tdl-cms/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
@@ -12,13 +13,17 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-firebase-hooks": "^5.1.1",
+    "react-ga": "^3.3.1",
     "react-icons": "^4.7.1",
     "react-router-dom": "^6.4.5",
+    "react-router-loading": "^1.0.0",
     "react-scripts": "5.0.0",
     "web-vitals": "^2.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -40,5 +45,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^4.0.0"
   }
 }

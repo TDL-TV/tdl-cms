@@ -6,10 +6,13 @@ import { collection, deleteDoc, doc, getDocs, query } from "firebase/firestore";
 import { BsPen, BsTrash2 } from "react-icons/bs";
 import Form from "./Form";
 import parse from "html-react-parser";
+import { useLoadingContext } from "react-router-loading";
 
 import { useNavigate } from "react-router-dom";
 
 const Content = () => {
+  const loadingContext = useLoadingContext();
+
   const navigate = useNavigate();
   let { type } = useParams();
 
@@ -19,21 +22,24 @@ const Content = () => {
   const [clickedAdd, setClickedAdd] = useState(false);
 
   const sortPosts = query(postCollectionRef);
-  
 
   const deletePost = async (id) => {
     const postDoc = doc(db, "posts", id);
     await deleteDoc(postDoc);
     alert("Deleted successfully");
-    navigate("/dashboard");
+    navigate("/dashboard/News and Events");
   };
 
   useEffect(() => {
+    loadingContext.start();
+    document.title = (type)
+
     const getPosts = async () => {
       const postData = await getDocs(sortPosts);
       setLoadedPost(
         postData.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
       );
+      loadingContext.done();
     };
     getPosts();
   }, []);
@@ -68,26 +74,33 @@ const Content = () => {
           {loadedPost
             .filter((post) => post.type === type)
             .map((data) => {
-
               if (type === "video") {
                 return (
                   <>
                     <div className="content_box">
                       <div className="change_buttons">
-                      <h4>{data.title}</h4>
+                        <h4>{data.title}</h4>
                         <div className="change_btn">
-                          <Link to={"/update/" + data.title}>
+                          <Link
+                            to={
+                              "/update/" +
+                              data.type.replace(/\s+/g, "-") +
+                              "/" +
+                              data.title.replace(/\s+/g, "-")
+                            }
+                          >
                             <BsPen />
                           </Link>
                         </div>
-  
+
                         <div
                           className="change_btn"
                           onClick={() => {
                             if (
                               window.confirm(
                                 `${
-                                  "Are you sure you want to delete " + data.title
+                                  "Are you sure you want to delete " +
+                                  data.title
                                 }`
                               )
                             ) {
@@ -99,6 +112,9 @@ const Content = () => {
                         </div>
                       </div>
                       <img src={data.image} alt="" />
+                      <h4>
+                        Posted on : {data.createdAt.toDate().toDateString()}
+                      </h4>
                       <h4>{data.category}</h4>
                       <h3>{data.username}</h3>
                       <p>{parse(data.description)}</p>
@@ -111,20 +127,28 @@ const Content = () => {
                   <>
                     <div className="content_box">
                       <div className="change_buttons">
-                      <h4>{data.title}</h4>
+                        <h4>{data.title}</h4>
                         <div className="change_btn">
-                          <Link to={"/update/" + data.title}>
+                          <Link
+                            to={
+                              "/update/" +
+                              data.type.replace(/\s+/g, "-") +
+                              "/" +
+                              data.title.replace(/\s+/g, "-")
+                            }
+                          >
                             <BsPen />
                           </Link>
                         </div>
-  
+
                         <div
                           className="change_btn"
                           onClick={() => {
                             if (
                               window.confirm(
                                 `${
-                                  "Are you sure you want to delete " + data.title
+                                  "Are you sure you want to delete " +
+                                  data.title
                                 }`
                               )
                             ) {
@@ -136,6 +160,9 @@ const Content = () => {
                         </div>
                       </div>
                       <img src={data.image} alt="" />
+                      <h4>
+                        Posted on : {data.createdAt.toDate().toDateString()}
+                      </h4>
                       <h4>{data.category}</h4>
                       <h3>{data.username}</h3>
                       <p>{parse(data.description)}</p>
@@ -143,7 +170,6 @@ const Content = () => {
                   </>
                 );
               }
-
             })}
         </div>
       </div>
