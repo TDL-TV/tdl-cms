@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/tdl-cms/static/css/main.35f14190.css",
-    "main.js": "/tdl-cms/static/js/main.214fb909.js",
+    "main.js": "/tdl-cms/static/js/main.6fd3bfbf.js",
     "static/media/image.JPG": "/tdl-cms/static/media/image.89bd8d59f56a39ee08ae.JPG",
     "static/media/tdllogo.png": "/tdl-cms/static/media/tdllogo.cf4590a9bc19393b96ec.png",
     "index.html": "/tdl-cms/index.html",
     "main.35f14190.css.map": "/tdl-cms/static/css/main.35f14190.css.map",
-    "main.214fb909.js.map": "/tdl-cms/static/js/main.214fb909.js.map"
+    "main.6fd3bfbf.js.map": "/tdl-cms/static/js/main.6fd3bfbf.js.map"
   },
   "entrypoints": [
     "static/css/main.35f14190.css",
-    "static/js/main.214fb909.js"
+    "static/js/main.6fd3bfbf.js"
   ]
 }
