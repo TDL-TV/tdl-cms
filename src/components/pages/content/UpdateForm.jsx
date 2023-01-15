@@ -64,6 +64,8 @@ const UpdateForm = () => {
 
         await updateDoc(postDoc, newData).then(() => {
           alert("Updated Successfully")
+        }).then(() => {
+          
           navigate("/dashboard/News and Events")
         });
       }
@@ -97,13 +99,20 @@ const UpdateForm = () => {
           date: updatedDate,
         };
 
-        await updateDoc(postDoc, newData);
+        await updateDoc(postDoc, newData).then(() => {
+          alert("Updated Successfully")
+        }).then(() => {
+          
+          navigate("/dashboard/News and Events")
+        });;
       }
 
       updatedDoc();
       if (updatedDoc) {
         alert("Updated Successfully");
         navigate("/dashboard/News and Events");
+      } else {
+        alert("Error")
       }
     }
   };
