@@ -7,7 +7,6 @@ import { db } from "../../firebase/FirebaseConfig";
 import { useNavigate } from "react-router-dom";
 
 import JoditEditor from "jodit-react";
-import parse from "html-react-parser";
 // import { getUsers } from "../../firebase/FirebaseActions";
 
 const Form = (props) => {

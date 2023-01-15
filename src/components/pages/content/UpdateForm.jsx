@@ -62,7 +62,10 @@ const UpdateForm = () => {
           date: updatedDate,
         };
 
-        await updateDoc(postDoc, newData);
+        await updateDoc(postDoc, newData).then(() => {
+          alert("Updated Successfully")
+          navigate("/dashboard/News and Events")
+        });
       }
 
       updatedDoc();
@@ -70,6 +73,8 @@ const UpdateForm = () => {
       if (updatedDoc) {
         alert("Updated Successfully");
         navigate("/dashboard/News and Events");
+      } else {
+        alert("Error")
       }
     } else {
       const updatedTitle = titleInputRef.current.value;
@@ -178,6 +183,7 @@ const UpdateForm = () => {
                 <li>
                   Category:
                   <select ref={categoryInputRef}>
+                    <option value={data.category}>{data.category}</option>
                     {allCategories
                       .filter(
                         (category) =>
@@ -278,6 +284,7 @@ const UpdateForm = () => {
                 <li>
                   Category:
                   <select ref={categoryInputRef}>
+                  <option value={data.category}>{data.category}</option>
                     {allCategories
                       .filter((category) => {
                         if (type === "photo") {
