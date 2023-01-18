@@ -17,7 +17,7 @@
 }
 
 .logo img {
-  width: 200px;
+  width: 86px;
 }
 
 .user {
@@ -133,26 +133,28 @@
   }
 
   .logo img {
-    width: 200px;
+    width: 75px;
   }
 }
 
 @media screen and (max-width:425px) {
 
   .logo img {
-    width: 150px;
+    width: 70px;
   }
 
-  .user p {
-    display: none;
-  }
-
+  
   .top_nav {
     height: 80px;
     padding: 0 10px;
   }
 }
-
+@media screen and (max-width:300px) {
+  
+  .user p {
+    display: none;
+  }
+}
 
 .bar {
   position: absolute;
